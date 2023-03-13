@@ -110,7 +110,7 @@ table{
     }
     
     tr:nth-child(even){
-    background-color:green;
+    background-color: rgb(190, 244, 244);
     }
     tr:nth-child(odd){
     background-color:yellow;

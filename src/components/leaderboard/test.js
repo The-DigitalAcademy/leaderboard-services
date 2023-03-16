@@ -6,6 +6,9 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+
+
+import { LeaderboardData } from "./database";
 import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -28,22 +31,29 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
+
+// const rows = [
+//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+//   // createData('Eclair', 262, 16.0, 24, 6.0),
+//   // createData('Cupcake', 305, 3.7, 67, 4.3),
+//   // createData('Gingerbread', 356, 16.0, 49, 3.9),
+// ];
+export default function Players({ LeaderboardData }) {
+  return (
+        <div id="profile">
+            {CustomizedTables(LeaderboardData)}
+        </div>
+  )
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function CustomizedTables() {
+function CustomizedTables( data ) {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{ minWidth: 70 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>#</StyledTableCell>
@@ -54,14 +64,15 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {data.map((value) => (
+            <StyledTableRow key={value.name}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {value.name}
+                <img src={value.img} alt="" />
               </StyledTableCell>
-              <StyledTableCell >{row.calories}</StyledTableCell>
-              <StyledTableCell >{row.fat}</StyledTableCell>
-              <StyledTableCell >{row.carbs}</StyledTableCell>
+              <StyledTableCell >{value.Game}</StyledTableCell>
+              <StyledTableCell >{value.score}</StyledTableCell>
+             
               
             </StyledTableRow>
           ))}

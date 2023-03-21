@@ -11,8 +11,8 @@ import '@fontsource/roboto/700.css';
 function App() {
   return (
     <div className="App">
-   {/* <Leaderboard/>
-    */}
+   {/* <Leaderboard/> */}
+   
     <CustomizedTables/>
     </div>
   );

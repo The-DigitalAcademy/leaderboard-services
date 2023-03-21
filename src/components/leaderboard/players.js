@@ -36,6 +36,9 @@ function Item(data){
                         </div>
 
                         
+                        <div className="col item ">
+                            <span>{value.dt}</span>
+                        </div>
                     </div>
                     )
                 )

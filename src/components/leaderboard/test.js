@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,10 +6,12 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-
+import Avatar from '@mui/material/Avatar';
 
 import { LeaderboardData } from "./database";
 import Paper from '@mui/material/Paper';
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,53 +33,65 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   // createData('Eclair', 262, 16.0, 24, 6.0),
-//   // createData('Cupcake', 305, 3.7, 67, 4.3),
-//   // createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
-export default function Players({ LeaderboardData }) {
+export default function Players() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    LeaderboardData.sort((a, b) => {
+      if ( a.score === b.score){
+          return b.score - a.score;
+      } else{
+          return b.score - a.score;
+      }
+  })
+    setData(LeaderboardData);
+  }, []);
+  const handleClick = (e) => {
+     
+  //  setPeriod(e.target.dataset.id)
+  }
   return (
         <div id="profile">
-            {CustomizedTables(LeaderboardData)}
+          <LeaderboardHeader/>
+          <div className="duration">
+            <button onClick={handleClick} data-id='7'>7 Days</button>
+            <button onClick={handleClick} data-id='30'>30 Days</button>
+            <button onClick={handleClick} data-id='0'>All-Time</button>
         </div>
-  )
-}
-
-function CustomizedTables( data ) {
-  return (
-    <TableContainer component={Paper}>
+                <TableContainer component={Paper}>
       <Table sx={{ minWidth: 70 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>#</StyledTableCell>
-            <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell >Game</StyledTableCell>
             <StyledTableCell >Score</StyledTableCell>
-           
+            <StyledTableCell >Date</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((value) => (
-            <StyledTableRow key={value.name}>
+          {data && data.map((value, index) => (
+            <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
                 {value.name}
-                <img src={value.img} alt="" />
+                <Avatar src={value.img} alt="User avatar" />
               </StyledTableCell>
               <StyledTableCell >{value.Game}</StyledTableCell>
               <StyledTableCell >{value.score}</StyledTableCell>
-             
-              
+              <StyledTableCell >{value.dt}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+        </div>
+  )
+
 }
+
+const LeaderboardHeader = () => {
+  return (
+    <div className="leadheader">
+        <h2>Leaderboard</h2>
+    </div>
+  )
+}
+

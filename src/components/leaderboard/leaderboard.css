@@ -65,9 +65,7 @@ color: rgb(50, 137, 123);
     /* color: var(--color-light); */
 }
 #profile{
-    /* display: flex; */
 
-    margin-top: 3em;
 }
 
 #profile .flex{

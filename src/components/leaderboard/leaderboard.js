@@ -61,7 +61,9 @@ const LeaderboardHeader = () => {
         <div className="col-xs-3 Score">
           <h4>Score</h4>
         </div>
-       
+        <div className="col-xs-3 Score">
+          <h4>Date</h4>
+        </div>
       </div>
     )
 }
